@@ -1,8 +1,5 @@
 pipeline {
 	agent any
-	tool{
-   def mvnHome = tool 'M3'
-	}
       stages {
     stage ('BUILD MAVEN') {
       steps {
