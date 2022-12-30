@@ -1,34 +1,21 @@
 pipeline {
-  agent any	
+  agent any
+	tools {
+		maven 'maven_3_5_0'
+	}
   stages {
-    stage ('BUILD') {
+    stage ('BUILD MAVEN') {
       steps {
-        echo "This is Build stage"
-        sh 'sleep 5;'
+	      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Vinay-RR/Test_Java.git']])
+        sh 'mvn clean install'
       }  
     }  
-      stage ('TEST PARALLEL') {
-	   parallel {
-	   stage ('TEST ON CHROME') {
-      steps {
-        echo "This is Test on chrome browser"
-        sh 'sleep 5;'
+      stage ('BUILD DOCKER IMAGE') {
+	   steps {
+		   script {
+			   sh 'docker build -t devops-integration .'
       }  
-    }  
-	   
-    stage ('TEST ON SAFARI') {
-      steps {
-        echo "This is Test on Safari browser"
-        sh 'sleep 5;'
       }  
     }  
   } 
-}
-	  stage('DEPLOY') {
-		  steps {
-			  echo 'This is Deploy stage'
-			  sh 'sleep 5'
-		  }
-	  }
-  }
 }
