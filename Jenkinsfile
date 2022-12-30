@@ -5,7 +5,7 @@ pipeline {
       stages {
     stage ('BUILD MAVEN') {
       steps {
-	      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Vinay-RR/Devops-October-2022/tree/main/applications/maven_app/src/main/java/com/harsha/calculator']])
+	      checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Vinay-RR/Devops-October-2022/tree/main/applications/maven_app']])
         sh 'mvn clean install'
       }  
     }  
