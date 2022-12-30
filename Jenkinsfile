@@ -1,5 +1,6 @@
 pipeline {
-	node {
+	agent any
+	tool {
    def mvnHome = tool 'M3'
 	}
       stages {
